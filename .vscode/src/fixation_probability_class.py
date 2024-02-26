@@ -95,21 +95,21 @@ class FixationProbabilityCalculator:
         TM = self.transition_matrix(adjacency_matrix)
         
         # Extract submatrices
+        # Q is the transition matrix between transient states
         Q = TM[1:self.number_of_states-1, 1:self.number_of_states-1]
+
+        # R is the probability of transition from any transient states to absorbing states
         a = TM[1:self.number_of_states-1, 0]
         b = TM[1:self.number_of_states-1, self.number_of_states-1]
-        
-        # Concatenate matrices
         R = np.concatenate((a, b), axis=0)
         R = np.transpose(R.reshape((2, self.number_of_states-2)))
         
         # Identity matrix
         Identity = np.identity(self.number_of_states-2)
 
-        # Calculate the inverse of (Identity - Q)
         inverse = np.linalg.inv(Identity - Q)
         
-        # Calculate Probability = inverse * R
+        # calculate $\phi= (Q-I)^{-1}R$ where $\phi$ is the absorption probability from any state to one of the absorbing points.
         Probability = np.dot(inverse, R)
         
         # Calculate fixation probability
