@@ -4,6 +4,7 @@ Each state is represented by a list $[i_1, i_2, i_3, ...]$ where $i_n$ is the nu
 As an example the number of mutants in patch 1, i.e. $i_1$ transitions to $i_1 + 1$ with the following probability:
 
 $ T[(i_1, i_2,...), (i_1+1, i_2,...)] = \sum_n A[n, 1]\dfrac{ri_n}{ F_t} \dfrac{M - i_1}{M} $
+
 where $A$ is the adjacent matrix of the network, $r$ is the relative fitness of the mutant, $M$ is the local population size, and $F_t$ is the total fitness of the population.
 
 #### calculating the fixation probability
