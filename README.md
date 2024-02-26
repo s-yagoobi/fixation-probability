@@ -1,1 +1,2 @@
-The aim of this project is to calculate the fixation probability in a graph-structured metapopulation.
+# Calculating fixation probability in a graph-structured meta-population
+This project aims to calculate the fixation probability in a graph-structured metapopulation.
