@@ -1,11 +1,14 @@
 
 import numpy as np
 
-numerical_fix_prob_06=np.loadtxt('star-N_5-M_4-mig-1e-06.txt')
-numerical_fix_prob_l_001=np.loadtxt('star-N_5-M_4-mig-0.01.txt')
-numerical_fix_prob_l_01=np.loadtxt('star-N_5-M_4-mig-0.1.txt')
-numerical_fix_prob_l_05=np.loadtxt('star-N_5-M_4-mig-0.5.txt')
-numerical_fix_prob_l_1=np.loadtxt('star-N_5-M_4-mig-1.txt')
+numerical_fix_prob_06=np.loadtxt('/Users/yagoobi/Documents/GitHub/fixation-probability/.vscode/data/star-N_5-M_4-mig-1e-06.txt')
+numerical_fix_prob_l_001=np.loadtxt('/Users/yagoobi/Documents/GitHub/fixation-probability/.vscode/data/star-N_5-M_4-mig-0.01.txt')
+numerical_fix_prob_l_01=np.loadtxt('/Users/yagoobi/Documents/GitHub/fixation-probability/.vscode/data/star-N_5-M_4-mig-0.1.txt')
+numerical_fix_prob_l_05=np.loadtxt('/Users/yagoobi/Documents/GitHub/fixation-probability/.vscode/data/star-N_5-M_4-mig-0.5.txt')
+numerical_fix_prob_l_1=np.loadtxt('/Users/yagoobi/Documents/GitHub/fixation-probability/.vscode/data/star-N_5-M_4-mig-1.txt')
+
+# import parameters
+import parameters
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
@@ -26,11 +29,11 @@ plt.fill_between(np.linspace(1.,2,20),y1=ylim[0],y2=0, color='whitesmoke')
 ax.axhline(y=0, color='k')
 
 #ax.plot(Fitness1,fix_prob_star_patch(Fitness1)-fix_prob_well_mixed(Fitness1,local_size*patch_number), color='g',label='low-migration')
-ax.plot(Fitness, numerical_fix_prob_06[:,1]-fix_prob_well_mixed(Fitness,local_size*patch_number) ,'P',color='tab:orange',markerfacecolor='none', label='$\lambda= 10^{-6}$')
-ax.plot(Fitness, numerical_fix_prob_l_001[:,1]-fix_prob_well_mixed(Fitness,local_size*patch_number) ,'s',color='b',markerfacecolor='none', label='$\lambda= 0.01$')
-ax.plot(Fitness,numerical_fix_prob_l_01[:,1]-fix_prob_well_mixed(Fitness,local_size*patch_number), '*',color='m',markerfacecolor='none', label='$\lambda=0.1$')
-ax.plot(Fitness, numerical_fix_prob_l_05[:,1]-fix_prob_well_mixed(Fitness,local_size*patch_number) ,'v',color='c',markerfacecolor='none', label='$\lambda= 0.5$')
-ax.plot(Fitness, numerical_fix_prob_l_1[:,1]-fix_prob_well_mixed(Fitness,local_size*patch_number) ,'o',color='darkred',markerfacecolor='none', label='$\lambda= 1$')
+ax.plot(parameters.Fitness, numerical_fix_prob_06[:,1] ,'P',color='tab:orange',markerfacecolor='none', label='$\lambda= 10^{-6}$')
+ax.plot(parameters.Fitness, numerical_fix_prob_l_001[:,1] ,'s',color='b',markerfacecolor='none', label='$\lambda= 0.01$')
+ax.plot(parameters.Fitness,numerical_fix_prob_l_01[:,1], '*',color='m',markerfacecolor='none', label='$\lambda=0.1$')
+ax.plot(parameters.Fitness, numerical_fix_prob_l_05[:,1] ,'v',color='c',markerfacecolor='none', label='$\lambda= 0.5$')
+ax.plot(parameters.Fitness, numerical_fix_prob_l_1[:,1],'o',color='darkred',markerfacecolor='none', label='$\lambda= 1$')
 #ax.plot(Fitness1, phi(Fitness1,local_size,local_size*(patch_number-1))-fix_prob_well_mixed(Fitness1,local_size*patch_number), color='r', label='$\lambda= 1$')
 ax.tick_params(labelsize=12, direction='out',top=True, right=True)
 ax.set_xlabel(r'fitness ($\bf{r}$) ',fontsize=14)
