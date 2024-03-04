@@ -4,3 +4,4 @@ number_of_patches = 4 # number of patches
 migration_probability = [0.000001,0.01,0.1,0.5,1] 
 Fitness = np.linspace(0.1,2.,20)
 Fitness1 = np.linspace(0.1,2,100)
+number_of_states = (local_size + 1) ** number_of_patches
