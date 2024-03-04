@@ -126,4 +126,4 @@ def fixation_probability(adjacency_matrix, fitness, number_of_states, number_of_
     for n in range(number_of_patches):
         fix_prob += Probability[(local_size+1)**n - 1, 1]
         
-    return fix_prob
+    return fix_prob / number_of_patches
