@@ -1,7 +1,5 @@
 import numpy as np
 
-
-
 def convert_to_base(decimal_number, base, number_of_patches):
     """
     Convert a decimal number to a number with arbitrary base.
@@ -10,9 +8,10 @@ def convert_to_base(decimal_number, base, number_of_patches):
     ----------
     decimal_number : int
         The decimal number to be converted.
-
     base : int
         The base to which the decimal number will be converted.
+    number_of_patches : int
+        Number of patches.
 
     Returns
     -------
@@ -39,6 +38,14 @@ def transition_matrix(adjacency_matrix, fitness, number_of_states, number_of_pat
     ----------
     adjacency_matrix : numpy.ndarray
         The adjacency matrix representing connectivity between patches.
+    fitness : float
+        Fitness of the population.
+    number_of_states : int
+        Number of states in the metapopulation.
+    number_of_patches : int
+        Number of patches in the metapopulation.
+    local_size : int
+        Local size of the population.
 
     Returns
     -------
@@ -48,7 +55,7 @@ def transition_matrix(adjacency_matrix, fitness, number_of_states, number_of_pat
     T = np.zeros([number_of_states, number_of_states])
     for i in range(number_of_states):
         # Convert i to the base of local_size to get the configuration on the graph as a list
-        i_config = convert_to_base(i, local_size + 1)
+        i_config = convert_to_base(i, local_size + 1, number_of_patches)
         # Calculate the total fitness
         total_fitness = fitness * sum(i_config) + number_of_patches * local_size - sum(i_config)
 
@@ -62,7 +69,7 @@ def transition_matrix(adjacency_matrix, fitness, number_of_states, number_of_pat
             # The probability that the number of mutants in patch n decreases by one
             if i - (local_size + 1) ** n >= 0:
                 for k in range(number_of_patches):
-                     T[i, i - (local_size + 1) ** n] += adjacency_matrix[k, n] * (local_size - i_config[k])
+                    T[i, i - (local_size + 1) ** n] += adjacency_matrix[k, n] * (local_size - i_config[k])
                 T[i, i - (local_size + 1) ** n] *= i_config[n] / (local_size * total_fitness)
 
     # Calculate the diagonal elements of the transition matrix
@@ -71,7 +78,7 @@ def transition_matrix(adjacency_matrix, fitness, number_of_states, number_of_pat
 
     return T
 
-def fixation_probability(migration_probability, fitness, number_of_states, number_of_patches, local_size):
+def fixation_probability(adjacency_matrix, fitness, number_of_states, number_of_patches, local_size):
     """
     Calculate the fixation probability of mutants in a metapopulation.
 
@@ -79,6 +86,14 @@ def fixation_probability(migration_probability, fitness, number_of_states, numbe
     ----------
     adjacency_matrix : numpy.ndarray
         The adjacency matrix representing connectivity between patches.
+    fitness : float
+        Fitness of the population.
+    number_of_states : int
+        Number of states in the metapopulation.
+    number_of_patches : int
+        Number of patches in the metapopulation.
+    local_size : int
+        Local size of the population.
 
     Returns
     -------
@@ -86,7 +101,7 @@ def fixation_probability(migration_probability, fitness, number_of_states, numbe
         The fixation probability of mutants.
     """
     # Compute the transition matrix
-    TM = transition_matrix(adjacency_matrix)
+    TM = transition_matrix(adjacency_matrix, fitness, number_of_states, number_of_patches, local_size)
         
     # Extract submatrices
     # Q is the transition matrix between transient states
