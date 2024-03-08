@@ -9,9 +9,9 @@ Initially, the whole population is occupied by wild-type (type 1). All of a sudd
 ## Code
 
 The code for calculating the fixation probability can be found in .vscode/src/fixation_probability_function.py.
-The documentation on how we calculate fixation probability can be found in .vscode/src/algorithm.md.
+The documentation on how we calculate fixation probability can be found in .vscode/docs/algorithm.md.
 
 ## Manuscript
 
-Also you can find the paper published based on this project [here](https://www.nature.com/articles/s41598-021-97187-6) or under .vscode/docs/manuscript.
+Also, you can find the paper published based on this project [here](https://www.nature.com/articles/s41598-021-97187-6) or under .vscode/docs/manuscript.
 
